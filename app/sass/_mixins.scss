@@ -5,11 +5,15 @@
 @mixin anim-linear{
 	transition: all .3s linear;
 }
-@mixin hover{
-  &:hover{
-    
-  }
+
+// Button sizes
+@mixin btn-size($padding-vertical, $padding-horizontal, $font-size, $line-height) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  line-height: $line-height;
 }
+
+
 /*FONTS*/
 @mixin fr {font-family: 'Univers-Roman',sans-serif;}
 @mixin fb {font-family: 'Univers-Bold',sans-serif;}
@@ -44,6 +48,7 @@
 @mixin rmin($width) {
   @media only screen and (min-width: $width+ "px") {
     @content; } }
+
 /*=======================END-MEDIA=====================*/
 //placeholder
 @mixin placeholder {

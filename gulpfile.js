@@ -13,12 +13,13 @@ const gulp = require('gulp'),
     reload = sync.reload;
 
 // --------------------------------------------If you need svg sprite
-var svgSprite = require('gulp-svg-sprite'),
+const svgSprite = require('gulp-svg-sprite'),
     svgmin = require('gulp-svgmin'),
     cheerio = require('gulp-cheerio'),
     replace = require('gulp-replace');
 
-gulp.task('svgSpriteBuild', function () {
+
+const svgSpriteBuild = () => {
     return gulp.src('app/i/icons/*.svg')
         // minify svg
         .pipe(svgmin({
@@ -52,12 +53,14 @@ gulp.task('svgSpriteBuild', function () {
             }
         }))
         .pipe(gulp.dest('app/i/sprite/'));
-});
+};
+
+exports.svgSpriteBuild = svgSpriteBuild;
 
 
 //pug task
 const html = () => {
-    return gulp.src('app/**/*.pug')
+    return gulp.src('app/pug/**/*.pug')
         .pipe(pug({pretty: true}))
         .pipe(gulp.dest('./dist/'))
         .pipe(reload({stream: true}));
@@ -133,6 +136,8 @@ const copy = () => {
     return gulp.src([
         'app/fonts/**/*',
         'app/images/**/*',
+        'app/sass/**/*',
+        'app/i/**/*',
     ], {
         base: 'app'
     })
@@ -165,7 +170,7 @@ exports.server = server;
 // Watch
 
 const watch = () => {
-    gulp.watch('app/*.pug', gulp.series(html));
+    gulp.watch('app/pug/**/*.pug', gulp.series(html));
     gulp.watch('app/sass/**/*.scss', gulp.series(style));
     gulp.watch('app/js/**/*.js', gulp.series(js));
     gulp.watch([
