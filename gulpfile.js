@@ -58,6 +58,31 @@ const svgSpriteBuild = () => {
 exports.svgSpriteBuild = svgSpriteBuild;
 
 
+// --------------------------------------------If you need icon fonts
+const iconfont = require('gulp-iconfont'),
+    iconfontCss = require('gulp-iconfont-css'),
+    fontName = 'Icons';
+
+const iconFonts = () => {
+    gulp.src(['app/i/icons/*.svg'])
+        .pipe(iconfontCss({
+            fontName: fontName,
+            path: 'app/sass/iconfont/_icons.scss',
+            targetPath: '../sass/_icons.scss',
+            fontPath: '../fonts/'
+        }))
+        .pipe(iconfont({
+            fontName: fontName,
+            formats: ['ttf', 'eot', 'woff', 'woff2', 'svg'],
+            normalize: true,
+            fontHeight: 1001,
+            centerHorizontally: true
+        }))
+        .pipe(gulp.dest('app/fonts/'));
+};
+
+exports.iconFonts = iconFonts;
+
 //pug task
 const html = () => {
     return gulp.src('app/pug/**/*.pug')

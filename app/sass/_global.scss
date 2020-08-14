@@ -1,1 +1,4 @@
 @import "mixins";
+.icon-check{
+  @extend %icon-empty;
+}
